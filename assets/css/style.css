@@ -1,5 +1,61 @@
-/* * {
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-} */
+    font-size: 62.5%;
+}
+
+body {
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+.header-text {
+    display: flex;
+    justify-content: space-between;
+    margin: 1% 1%;
+}
+
+.high-score {
+    font-size: 5rem;
+    color: violet;
+}
+
+a {
+    text-decoration: none;
+}
+
+.timer {
+    font-size: 3rem;
+    margin-top: .5%;
+}
+
+.time-remaining {
+    font-size: 3rem;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 4%;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 6rem;
+}
+
+.directions {
+    font-size: 3rem;
+    text-align: center;
+    margin: 1% 24.5%;
+}
+
+.start-button {
+    color: white;
+    background-color: #330066;
+    font-size: 3rem;
+    padding: 1% 2%;
+    margin-top: 1%;
+    border-radius: 1.5rem;
+}
