@@ -8,22 +8,22 @@
 body {
     font-family: Helvetica, Arial, sans-serif;
 }
-
+/* align the header properly */
 .header-text {
     display: flex;
     justify-content: space-between;
-    margin: 1% 1%;
+    margin: 1% 2%;
 }
-
+/* style the high score link */
 .high-score {
     font-size: 5rem;
     color: violet;
 }
-
+/* remove any default decorations for all links */
 a {
     text-decoration: none;
 }
-
+/* stlye the quiz timer */
 .timer {
     font-size: 3rem;
     margin-top: .5%;
@@ -32,7 +32,7 @@ a {
 .time-remaining {
     font-size: 3rem;
 }
-
+/* style the title, directions and start button */
 main {
     display: flex;
     flex-direction: column;
@@ -51,11 +51,15 @@ main {
     margin: 1% 24.5%;
 }
 
-.start-button {
+.button {
     color: white;
     background-color: #330066;
     font-size: 3rem;
-    padding: 1% 2%;
-    margin-top: 1%;
+    padding: 1rem 2rem;
+    margin-top: 1rem;
     border-radius: 1.5rem;
+}
+
+.button:hover {
+    background-color: violet;
 }

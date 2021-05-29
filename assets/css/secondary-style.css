@@ -1,0 +1,21 @@
+main {
+    align-items: flex-start;
+    margin-top: 10%;
+    padding-left: 33%;
+}
+
+.score-list {
+    height: 4rem;
+    width: 50%;
+    background-color: #ccccff;
+    margin: 2rem 0;
+    margin-left: 1rem;
+}
+
+.buttons {
+    display: flex;
+    align-items: flex-start;
+    width: 36%;
+    justify-content: space-between;
+    margin-left: 1rem;
+}
