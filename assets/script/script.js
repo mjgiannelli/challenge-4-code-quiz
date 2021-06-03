@@ -9,6 +9,7 @@
 //    -do not let user enter highscore if they have 0 or less points
 // update the high score list to include the new high score.
 
+// create array object that holds questions and answers
 var questions = [
     {
         q: 'Commonly used data types DO NOT include:',
@@ -23,7 +24,17 @@ var questions = [
     {
         q: 'A very useful tool used during development and debugging for printing content to the debugger is:',
         choices: ['1. JavaScript', '2. terminal/bash', '3. for loops', '4. console.log'],
-        a: '2. curly brackets'
+        a: '4. console.log'
+    },
+    {
+        q: 'Arrays in JavaScript can be used to store ________.',
+        choices: ['1. numbers and strings', '2. other arrays', '3. booleans', '4. all of the above'],
+        a: '4. all of the above'
+    },
+    {
+        q: 'String values must be enclosed within ________ when being assigned to variables.',
+        choices: ['1. commas', '2. curly brackets', '3. quotes', '4. parenthesis'],
+        a: '3. quotes'
     }
 ]
 
