@@ -38,3 +38,17 @@ var questions = [
     }
 ]
 
+// function to clear the contents of main once the start button is clicked
+function clearPage() {
+    $('main').remove();
+}
+
+// function to start timer and iterate/validate through questions
+function askQuestions() {
+
+}
+
+$('#start-quiz').on('click', function () {
+    clearPage();
+})
+
