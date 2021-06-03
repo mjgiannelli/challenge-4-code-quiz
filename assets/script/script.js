@@ -8,6 +8,22 @@
 // the user then can save their initials and high score which will be displayed on the high score list
 //    -do not let user enter highscore if they have 0 or less points
 // update the high score list to include the new high score.
-//    -order high scores by highest score in local storage
-// when user clicks the high score link to view high scores, retrieve all highscores from localstorage by highest score using an ordered list
-//    -create a button on page that also clears high scores from local storage
+
+var questions = [
+    {
+        q: 'Commonly used data types DO NOT include:',
+        choices: ['1. strings', '2. booleans', '3. alerts', '4. numbers'],
+        a: '3. alerts'
+    },
+    {
+        q: 'The condition in an if/else statement is enclosed with ________.',
+        choices: ['1. quotes', '2. curly brackets', '3. parenthesis', '4. square brackets'],
+        a: '2. curly brackets'
+    },
+    {
+        q: 'A very useful tool used during development and debugging for printing content to the debugger is:',
+        choices: ['1. JavaScript', '2. terminal/bash', '3. for loops', '4. console.log'],
+        a: '2. curly brackets'
+    }
+]
+
