@@ -1,3 +1,5 @@
+// START PSEUDO CODE
+
 //create an object array for questions/answers/correct answers
 //create a click response when play hits start quiz, the timer starts and decreases by 1 sec
 //create html div elements that contain the question and answers to choose
@@ -8,6 +10,8 @@
 // the user then can save their initials and high score which will be displayed on the high score list
 //    -do not let user enter highscore if they have 0 or less points
 // update the high score list to include the new high score.
+
+// END PSEUDO CODE
 
 // create array object that holds questions and answers
 var questions = [
@@ -40,15 +44,49 @@ var questions = [
 
 // function to clear the contents of main once the start button is clicked
 function clearPage() {
-    $('main').remove();
+    $('main').empty();
 }
 
 // function to start timer and iterate/validate through questions
-function askQuestions() {
+function askFirstQuestion() {
+    //to add question and choices to main element
+
+    var newMain = $('main').addClass('question');
+
+    //create question for user
+    var firstQuizQuestion = $('<h1>')
+        .addClass('title')
+        .text(questions[0]['q']);
+
+    $(newMain).append(firstQuizQuestion);
+
+    //create user choices to select
+    for (var i = 0; i < questions[0]['choices'].length; i++) {
+        var firstQuestionChoices = $('<button>')
+            .addClass('button button-secondary')
+            .text(questions[0]['choices'][i])
+            .attr({
+                type: 'button',
+                id: 'user-selection'
+            })
+        $(newMain).append(firstQuestionChoices);
+    }
+
+
+
+}
+
+// set to 75 and start the timer once the start button is clicked
+function startTimer() {
+
+    var setTime = $('.time-remaining').text(75);
+    
 
 }
 
 $('#start-quiz').on('click', function () {
     clearPage();
+    askFirstQuestion();
+    startTimer();
 })
 

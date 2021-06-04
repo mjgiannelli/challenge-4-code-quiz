@@ -63,3 +63,16 @@ main {
 .button:hover {
     background-color: violet;
 }
+/* style the question that's being displayed */
+.question {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 50rem;
+    width: 100rem;
+}
+/* style the user choices */
+.button-secondary {
+    width: 35%;
+    text-align: left;
+}
