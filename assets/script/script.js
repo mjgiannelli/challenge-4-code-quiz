@@ -79,8 +79,15 @@ function askFirstQuestion() {
 // set to 75 and start the timer once the start button is clicked
 function startTimer() {
 
-    var setTime = $('.time-remaining').text(75);
-    
+    //set timer to 75 seconds
+    var startTime = 75;
+    var setTime = $('.time-remaining').text(startTime);
+
+    //count down by 1 second
+    setInterval(function () {
+        startTime--;
+        var setTime = $('.time-remaining').text(startTime);
+    }, 1000);
 
 }
 
