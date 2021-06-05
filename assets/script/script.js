@@ -14,7 +14,8 @@
 // END PSEUDO CODE
 
 // set timer start time
-var startTime = 10;
+//TODO: update timer to 75
+var startTime = 100000;
 
 // create array object that holds questions and answers
 var questions = [
@@ -92,11 +93,12 @@ function askQuestions() {
 
                     validator(userSelection, currentQuestion);
                     // on click fade current question out and increase index of object array by 1
-                    $($questions.get(currentQuestion)).fadeOut(1500, function () {
+                    // TODO: update fadeOut time to 1500
+                    $($questions.get(currentQuestion)).fadeOut(100, function () {
                         currentQuestion = currentQuestion + 1;
                         //check to see if all questions were asked
                         if (currentQuestion == totalQuestions) {
-                            alert('test is done!');
+                            endQuiz();
                         }
                         //if not, fade in the next question
                         else {
@@ -143,7 +145,6 @@ function startTimer(startTime) {
         if (retrieveTime <= 0) {
             clearInterval(runClock);
             parseInt($('.time-remaining').text(0))
-            clearPage();
             clearInterval(checkTime);
             endQuiz();
         }
@@ -187,8 +188,10 @@ function validator(userSelection, currentQuestion) {
 
 //create the 'end quiz' page where user can enter their initials
 function endQuiz() {
+    // clear page
+    clearPage();
     // add 'all done' alert
-    var newMain = $('main').addClass('question');
+    var newMain = $('main').addClass('main-end');
     var endQuizAlert = $('<h1>')
         .addClass('title')
         .text('All done!');
@@ -216,8 +219,7 @@ function endQuiz() {
         });
 
         $(newMain).append(homePageLink);
-
-
+        // create go back button to homepage button
         var goBackBtn = $('<button>')
             .addClass('button')
             .text('Go back')
@@ -226,6 +228,46 @@ function endQuiz() {
             });
 
         $(homePageLink).append(goBackBtn);
+    }
+
+    else {
+        // create label & input to allow user to enter intials
+        var highscoreForm = $('<form>')
+            .addClass('highscore-form')
+            .attr({
+                action: './high-scores.html'
+            });
+
+        $(newMain).append(highscoreForm);
+
+
+        var enterInitials = $('<label>')
+            .text('Enter initials: ')
+            .addClass('enter-initials')
+            .attr({
+                for: 'name',
+            })
+
+        $(highscoreForm).append(enterInitials);
+
+        var initials = $('<input>')
+            .addClass('initials')
+            .attr({
+                type: 'text',
+                placeholder: 'AAA',
+                id: 'name',
+                name: 'name'
+            });
+        $(highscoreForm).append(initials);
+
+        var submitHighscore = $('<input>')
+            .addClass('button')
+            .attr({
+                type: 'submit',
+                value: 'Submit',
+                id: 'submit'
+            });
+        $(highscoreForm).append(submitHighscore);
     }
 }
 

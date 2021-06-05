@@ -92,8 +92,33 @@ main {
     font-style: italic;
 }
 
+.main-end {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 50rem;
+    width: 100%;
+}
+
 /* style the final score alert on end quiz page */
 .final-score {
     font-size: 4rem;
     margin-top: 1rem;
+}
+
+.highscore-form{
+    display: flex;
+}
+
+.enter-initials {
+    font-size: 4rem;
+    margin-top: 1.5rem;
+    margin-right: 1rem;
+}
+
+.initials {
+    font-size: 3rem;
+    text-align: center;
+    margin-top: 1rem;
+    margin-right: 1rem;
 }
