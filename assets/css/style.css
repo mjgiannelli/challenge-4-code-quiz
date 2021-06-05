@@ -82,3 +82,12 @@ main {
     width: 35%;
     text-align: left;
 }
+
+/* style the alert that pops up on user selection */
+.validate-choice {
+    font-size: 3rem;
+    color: lightgrey;
+    margin-top: 3rem;
+    border-top: .3rem solid lightgrey;
+    font-style: italic;
+}

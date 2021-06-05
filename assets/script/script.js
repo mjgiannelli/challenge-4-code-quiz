@@ -54,14 +54,19 @@ function clearPage() {
 function askQuestions() {
     //set buttonId counter
     var buttonId = 0;
+    var divId = 0;
 
     //to add question and choices to main element
     for (var i = 0; i < questions.length; i++) {
         var newMain = $('main').addClass('question');
 
         //create question for user
-        var questionContainer = $('<div>').addClass('questions');
+        var questionContainer = $('<div>').addClass('questions').attr({
+            id: 'div' + divId
+        });
         $(newMain).append(questionContainer);
+
+        divId++;
 
         var quizQuestion = $('<h1>')
             .addClass('title')
@@ -87,7 +92,7 @@ function askQuestions() {
 
                     validator(userSelection, currentQuestion);
                     // on click fade current question out and increase index of object array by 1
-                    $($questions.get(currentQuestion)).fadeOut(function () {
+                    $($questions.get(currentQuestion)).fadeOut(1500, function () {
                         currentQuestion = currentQuestion + 1;
                         //check to see if all questions were asked
                         if (currentQuestion == totalQuestions) {
@@ -97,11 +102,12 @@ function askQuestions() {
                         else {
                             $($questions.get(currentQuestion)).fadeIn();
                         }
-                    })
+                    });
                 })
             $(questionContainer).append(questionChoices);
 
             buttonId++;
+
         }
     }
 
@@ -148,6 +154,12 @@ function validator(userSelection, currentQuestion) {
         // create a message under buttons to say wrong
         var adjustedTime = parseInt($('.time-remaining').text()) - 10;
         startTime = adjustedTime;
+        // add a <p> displaying the alert in the current question div
+        var validateChoice = $('<p>')
+            .addClass('validate-choice')
+            .text("Wrong!")
+
+        $('#div' + currentQuestion).append(validateChoice)
     }
 
     // else create a message under buttons to say correct
