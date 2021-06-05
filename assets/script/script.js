@@ -139,7 +139,7 @@ function startTimer(startTime) {
 
 }
 
-// add timer function to start/restart countdown
+// add timer function to start timer function
 function timer() {
     startTime--;
     $('.time-remaining').text(startTime);
@@ -164,7 +164,11 @@ function validator(userSelection, currentQuestion) {
 
     // else create a message under buttons to say correct
     else {
-        console.log("correct choice");
+        var validateChoice = $('<p>')
+            .addClass('validate-choice')
+            .text("Correct!")
+
+        $('#div' + currentQuestion).append(validateChoice)
     }
 }
 $('#start-quiz').on('click', function () {
