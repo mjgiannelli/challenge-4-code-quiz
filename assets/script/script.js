@@ -12,7 +12,7 @@
 // update the high score list to include the new high score.
 
 // END PSEUDO CODE
-
+btns = document.getElementsByClassName("button button-secondary");
 // create array object that holds questions and answers
 var questions = [
     {
@@ -48,33 +48,123 @@ function clearPage() {
 }
 
 // function to start timer and iterate/validate through questions
-function askFirstQuestion() {
+function askQuestions() {
     //to add question and choices to main element
+    for (var i = 0; i < questions.length; i++) {
+        var newMain = $('main').addClass('question');
 
-    var newMain = $('main').addClass('question');
+        //create question for user
+        var questionContainer = $('<div>').addClass('questions');
+        $(newMain).append(questionContainer);
 
-    //create question for user
-    var firstQuizQuestion = $('<h1>')
-        .addClass('title')
-        .text(questions[0]['q']);
+        var firstQuizQuestion = $('<h1>')
+            .addClass('title')
+            .text(questions[i]['q']);
 
-    $(newMain).append(firstQuizQuestion);
+        $(questionContainer).append(firstQuizQuestion);
 
-    //create user choices to select
-    for (var i = 0; i < questions[0]['choices'].length; i++) {
-        var firstQuestionChoices = $('<button>')
-            .addClass('button button-secondary')
-            .text(questions[0]['choices'][i])
-            .attr({
-                type: 'button',
-                id: 'user-selection'
-            })
-        $(newMain).append(firstQuestionChoices);
+        //create user choices to select
+        for (var y = 0; y < questions[i]['choices'].length; y++) {
+            var firstQuestionChoices = $('<button>')
+                .addClass('button button-secondary')
+                .text(questions[i]['choices'][y])
+                .attr({
+                    type: 'button',
+                })
+                .on('click', function () {
+                    $($questions.get(currentQuestion)).fadeOut(function () {
+                        currentQuestion = currentQuestion + 1;
+                        if (currentQuestion == totalQuestions) {
+                            alert('test is done!');
+                        }
+                        else {
+                            $($questions.get(currentQuestion)).fadeIn();
+                        }
+                    })
+                })
+            $(questionContainer).append(firstQuestionChoices);
+        }
     }
 
+    var totalQuestions = questions.length;
+
+    var currentQuestion = 0;
+
+    $questions = $('.questions');
+    console.log($questions);
+
+    $questions.hide();
+
+    $($questions.get(currentQuestion)).fadeIn();
 
 
 }
+
+
+
+// function askRemainingQuestions() {
+
+//     // to be able to target clicks on the answer choice the user selects
+//     clearPage();
+
+//     var newMain = $('main').addClass('question');
+//     var i = 1;
+//     //create question for user
+//     var nextQuizQuestion = $('<h1>')
+//         .addClass('title')
+//         .text(questions[i]['q']);
+
+//     $(newMain).append(nextQuizQuestion);
+
+
+//     //create user choices to select
+//     for (var y = 0; y < questions[i]['choices'].length; y++) {
+//         var nextQuestionChoices = $('<button>')
+//             .addClass('button button-secondary')
+//             .text(questions[i]['choices'][y])
+//             .attr({
+//                 type: 'button',
+//             })
+//             .on('click', function () {
+//                 askRemainingQuestions2();
+//             })
+//         $(newMain).append(nextQuestionChoices);
+//     }
+//     return i++;
+
+
+// }
+
+// function askRemainingQuestions2() {
+
+//     // to be able to target clicks on the answer choice the user selects
+//     clearPage();
+
+//     var newMain = $('main').addClass('question');
+//     var i = 2;
+//     //create question for user
+//     var nextQuizQuestion = $('<h1>')
+//         .addClass('title')
+//         .text(questions[i]['q']);
+
+//     $(newMain).append(nextQuizQuestion);
+
+
+//     //create user choices to select
+//     for (var y = 0; y < questions[i]['choices'].length; y++) {
+//         var nextQuestionChoices = $('<button>')
+//             .addClass('button button-secondary')
+//             .text(questions[i]['choices'][y])
+//             .attr({
+//                 type: 'button',
+//             })
+//         $(newMain).append(nextQuestionChoices);
+//     }
+//     return i++;
+
+
+// }
+
 
 // set to 75 and start the timer once the start button is clicked
 function startTimer() {
@@ -93,7 +183,10 @@ function startTimer() {
 
 $('#start-quiz').on('click', function () {
     clearPage();
-    askFirstQuestion();
+    askQuestions();
     startTimer();
 })
+
+
+
 

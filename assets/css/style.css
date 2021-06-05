@@ -71,7 +71,13 @@ main {
     margin-left: 50rem;
     width: 100rem;
 }
+
 /* style the user choices */
+.questions {
+    display: flex;
+    flex-direction: column;
+}
+
 .button-secondary {
     width: 35%;
     text-align: left;
