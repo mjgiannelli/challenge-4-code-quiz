@@ -12,7 +12,10 @@
 // update the high score list to include the new high score.
 
 // END PSEUDO CODE
-btns = document.getElementsByClassName("button button-secondary");
+
+// target the DOM create buttons user selects for answer
+btns = document.getElementsByClassName("button button-secondary")
+
 // create array object that holds questions and answers
 var questions = [
     {
@@ -49,6 +52,9 @@ function clearPage() {
 
 // function to start timer and iterate/validate through questions
 function askQuestions() {
+    //set buttonId counter
+    var buttonId = 0;
+
     //to add question and choices to main element
     for (var i = 0; i < questions.length; i++) {
         var newMain = $('main').addClass('question');
@@ -57,114 +63,62 @@ function askQuestions() {
         var questionContainer = $('<div>').addClass('questions');
         $(newMain).append(questionContainer);
 
-        var firstQuizQuestion = $('<h1>')
+        var quizQuestion = $('<h1>')
             .addClass('title')
             .text(questions[i]['q']);
 
-        $(questionContainer).append(firstQuizQuestion);
+        $(questionContainer).append(quizQuestion);
 
         //create user choices to select
         for (var y = 0; y < questions[i]['choices'].length; y++) {
-            var firstQuestionChoices = $('<button>')
+            var questionChoices = $('<button>')
                 .addClass('button button-secondary')
                 .text(questions[i]['choices'][y])
                 .attr({
                     type: 'button',
+                    id: buttonId
                 })
                 .on('click', function () {
+                    //validate user selection
+                    var userSelection = ($(this)
+                        .text()
+                        .trim());
+
+                    validator(userSelection);
+                    // on click fade current question out and increase index of object array by 1
                     $($questions.get(currentQuestion)).fadeOut(function () {
                         currentQuestion = currentQuestion + 1;
+                        //check to see if all questions were asked
                         if (currentQuestion == totalQuestions) {
                             alert('test is done!');
                         }
+                        //if not, fade in the next question
                         else {
                             $($questions.get(currentQuestion)).fadeIn();
                         }
                     })
                 })
-            $(questionContainer).append(firstQuestionChoices);
+            $(questionContainer).append(questionChoices);
+
+            buttonId++;
         }
     }
 
+    // let function know when to break
     var totalQuestions = questions.length;
 
+    //set index to new object array
     var currentQuestion = 0;
 
+    //create new object array for dom generated questions
     $questions = $('.questions');
-    console.log($questions);
 
+    //hide all the questions generated
     $questions.hide();
 
+    //show first question
     $($questions.get(currentQuestion)).fadeIn();
-
-
 }
-
-
-
-// function askRemainingQuestions() {
-
-//     // to be able to target clicks on the answer choice the user selects
-//     clearPage();
-
-//     var newMain = $('main').addClass('question');
-//     var i = 1;
-//     //create question for user
-//     var nextQuizQuestion = $('<h1>')
-//         .addClass('title')
-//         .text(questions[i]['q']);
-
-//     $(newMain).append(nextQuizQuestion);
-
-
-//     //create user choices to select
-//     for (var y = 0; y < questions[i]['choices'].length; y++) {
-//         var nextQuestionChoices = $('<button>')
-//             .addClass('button button-secondary')
-//             .text(questions[i]['choices'][y])
-//             .attr({
-//                 type: 'button',
-//             })
-//             .on('click', function () {
-//                 askRemainingQuestions2();
-//             })
-//         $(newMain).append(nextQuestionChoices);
-//     }
-//     return i++;
-
-
-// }
-
-// function askRemainingQuestions2() {
-
-//     // to be able to target clicks on the answer choice the user selects
-//     clearPage();
-
-//     var newMain = $('main').addClass('question');
-//     var i = 2;
-//     //create question for user
-//     var nextQuizQuestion = $('<h1>')
-//         .addClass('title')
-//         .text(questions[i]['q']);
-
-//     $(newMain).append(nextQuizQuestion);
-
-
-//     //create user choices to select
-//     for (var y = 0; y < questions[i]['choices'].length; y++) {
-//         var nextQuestionChoices = $('<button>')
-//             .addClass('button button-secondary')
-//             .text(questions[i]['choices'][y])
-//             .attr({
-//                 type: 'button',
-//             })
-//         $(newMain).append(nextQuestionChoices);
-//     }
-//     return i++;
-
-
-// }
-
 
 // set to 75 and start the timer once the start button is clicked
 function startTimer() {
@@ -179,6 +133,13 @@ function startTimer() {
         var setTime = $('.time-remaining').text(startTime);
     }, 1000);
 
+}
+
+function validator(userSelection, currentQuestion) {
+    //if userselection does not equal the 'choice' value of currentQuestion
+    // create a message under buttons to say wrong
+    // subtract 10seconds from the timer
+    // else create a message under buttons to say correct
 }
 
 $('#start-quiz').on('click', function () {
