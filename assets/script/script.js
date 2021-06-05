@@ -13,8 +13,8 @@
 
 // END PSEUDO CODE
 
-// target the DOM create buttons user selects for answer
-btns = document.getElementsByClassName("button button-secondary")
+// set timer start time
+var startTime = 75;
 
 // create array object that holds questions and answers
 var questions = [
@@ -80,11 +80,12 @@ function askQuestions() {
                 })
                 .on('click', function () {
                     //validate user selection
+
                     var userSelection = ($(this)
                         .text()
                         .trim());
 
-                    validator(userSelection);
+                    validator(userSelection, currentQuestion);
                     // on click fade current question out and increase index of object array by 1
                     $($questions.get(currentQuestion)).fadeOut(function () {
                         currentQuestion = currentQuestion + 1;
@@ -121,31 +122,43 @@ function askQuestions() {
 }
 
 // set to 75 and start the timer once the start button is clicked
-function startTimer() {
+function startTimer(startTime) {
 
     //set timer to 75 seconds
-    var startTime = 75;
-    var setTime = $('.time-remaining').text(startTime);
+
+    $('.time-remaining').text(startTime);
 
     //count down by 1 second
-    setInterval(function () {
-        startTime--;
-        var setTime = $('.time-remaining').text(startTime);
-    }, 1000);
+    setInterval(timer, 1000);
 
 }
+
+// add timer function to start/restart countdown
+function timer() {
+    startTime--;
+    $('.time-remaining').text(startTime);
+}
+
 
 function validator(userSelection, currentQuestion) {
+    //pull correct choice from questions array
+    var correctChoice = questions[currentQuestion]['a'];
     //if userselection does not equal the 'choice' value of currentQuestion
-    // create a message under buttons to say wrong
-    // subtract 10seconds from the timer
-    // else create a message under buttons to say correct
-}
+    if (userSelection !== correctChoice) {
+        // create a message under buttons to say wrong
+        var adjustedTime = parseInt($('.time-remaining').text()) - 10;
+        startTime = adjustedTime;
+    }
 
+    // else create a message under buttons to say correct
+    else {
+        console.log("correct choice");
+    }
+}
 $('#start-quiz').on('click', function () {
     clearPage();
     askQuestions();
-    startTimer();
+    startTimer(startTime);
 })
 
 
