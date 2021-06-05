@@ -14,7 +14,7 @@
 // END PSEUDO CODE
 
 // set timer start time
-var startTime = 75;
+var startTime = 10;
 
 // create array object that holds questions and answers
 var questions = [
@@ -135,8 +135,22 @@ function startTimer(startTime) {
     $('.time-remaining').text(startTime);
 
     //count down by 1 second
-    setInterval(timer, 1000);
+    var runClock = setInterval(timer, 1000);
 
+    // check timer to see when it hits 0
+    var checkTime = setInterval(function () {
+        var retrieveTime = parseInt($('.time-remaining').text());
+        if (retrieveTime <= 0) {
+            clearInterval(runClock);
+            parseInt($('.time-remaining').text(0))
+            clearPage();
+            clearInterval(checkTime);
+            endQuiz();
+        }
+        else {
+            console.log(retrieveTime);
+        }
+    }, 1000)
 }
 
 // add timer function to start timer function
@@ -144,7 +158,6 @@ function timer() {
     startTime--;
     $('.time-remaining').text(startTime);
 }
-
 
 function validator(userSelection, currentQuestion) {
     //pull correct choice from questions array
@@ -171,6 +184,54 @@ function validator(userSelection, currentQuestion) {
         $('#div' + currentQuestion).append(validateChoice)
     }
 }
+
+//create the 'end quiz' page where user can enter their initials
+function endQuiz() {
+    // add 'all done' alert
+    var newMain = $('main').addClass('question');
+    var endQuizAlert = $('<h1>')
+        .addClass('title')
+        .text('All done!');
+
+    $(newMain).append(endQuizAlert);
+
+    // add final score alert
+    var finalScoreAlert = $('<p>')
+        .addClass('final-score')
+        .text('Your final score is ' + $('.time-remaining').text() + '.');
+
+    $(newMain).append(finalScoreAlert);
+
+    // check if final score is 0. If true - try again to make the high score list and allow them to go back to the homepage
+    // else - allow user to input initals and save to local storage as a ordered list
+    if (parseInt($('.time-remaining').text()) === 0) {
+        var noHighScore = $('<p>')
+            .addClass('final-score')
+            .text('Unfortunately you did not obtain a high score. Try again!');
+
+        $(newMain).append(noHighScore);
+        // create <a> to reference homepage
+        var homePageLink = $('<a>').attr({
+            href: './index.html'
+        });
+
+        $(newMain).append(homePageLink);
+
+
+        var goBackBtn = $('<button>')
+            .addClass('button')
+            .text('Go back')
+            .attr({
+                type: 'button'
+            });
+
+        $(homePageLink).append(goBackBtn);
+    }
+}
+
+
+
+//when user clicks start quiz button - start timer and show first question
 $('#start-quiz').on('click', function () {
     clearPage();
     askQuestions();

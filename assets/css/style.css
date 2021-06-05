@@ -91,3 +91,9 @@ main {
     border-top: .3rem solid lightgrey;
     font-style: italic;
 }
+
+/* style the final score alert on end quiz page */
+.final-score {
+    font-size: 4rem;
+    margin-top: 1rem;
+}
