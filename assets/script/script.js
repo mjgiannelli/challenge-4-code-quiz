@@ -10,6 +10,9 @@
 // the user then can save their initials and high score which will be displayed on the high score list
 //    -do not let user enter highscore if they have 0 or less points
 // update the high score list to include the new high score.
+//    -order high scores by highest score in local storage
+// when user clicks the high score link to view high scores, retrieve all highscores from localstorage by highest score using an ordered list
+//    -create a button on page that also clears high scores from local storage
 
 // END PSEUDO CODE
 
@@ -18,6 +21,7 @@ var userHighscoreData = {};
 // set timer start time
 var startTime = 75;
 
+//create questions array
 var questions = [
     {
         q: 'Commonly used data types DO NOT include:',
