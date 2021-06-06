@@ -17,7 +17,6 @@
 //TODO: update timer to 75
 var startTime = 100000;
 
-// create array object that holds questions and answers
 var questions = [
     {
         q: 'Commonly used data types DO NOT include:',
@@ -53,6 +52,28 @@ function clearPage() {
 
 // function to start timer and iterate/validate through questions
 function askQuestions() {
+
+    //set timer to 75 seconds
+
+    $('.time-remaining').text(startTime);
+
+    //count down by 1 second
+    var runClock = setInterval(timer, 1000);
+
+    // check timer to see when it hits 0
+    var checkTime = setInterval(function () {
+        var retrieveTime = parseInt($('.time-remaining').text());
+        if (retrieveTime <= 0) {
+            clearInterval(runClock);
+            parseInt($('.time-remaining').text(0))
+            clearInterval(checkTime);
+            endQuiz();
+        }
+        else {
+            console.log(retrieveTime);
+        }
+    }, 1000)
+
     //set buttonId counter
     var buttonId = 0;
     var divId = 0;
@@ -98,6 +119,8 @@ function askQuestions() {
                         currentQuestion = currentQuestion + 1;
                         //check to see if all questions were asked
                         if (currentQuestion == totalQuestions) {
+                            clearInterval(runClock);
+                            clearInterval(checkTime);
                             endQuiz();
                         }
                         //if not, fade in the next question
@@ -130,29 +153,10 @@ function askQuestions() {
 }
 
 // set to 75 and start the timer once the start button is clicked
-function startTimer(startTime) {
+// function startTimer(startTime) {
 
-    //set timer to 75 seconds
 
-    $('.time-remaining').text(startTime);
-
-    //count down by 1 second
-    var runClock = setInterval(timer, 1000);
-
-    // check timer to see when it hits 0
-    var checkTime = setInterval(function () {
-        var retrieveTime = parseInt($('.time-remaining').text());
-        if (retrieveTime <= 0) {
-            clearInterval(runClock);
-            parseInt($('.time-remaining').text(0))
-            clearInterval(checkTime);
-            endQuiz();
-        }
-        else {
-            console.log(retrieveTime);
-        }
-    }, 1000)
-}
+// }
 
 // add timer function to start timer function
 function timer() {
@@ -234,9 +238,9 @@ function endQuiz() {
         // create label & input to allow user to enter intials
         var highscoreForm = $('<form>')
             .addClass('highscore-form')
-            .attr({
-                action: './high-scores.html'
-            });
+        // .attr({
+        //     action: './high-scores.html'
+        // });
 
         $(newMain).append(highscoreForm);
 
@@ -266,8 +270,15 @@ function endQuiz() {
                 type: 'submit',
                 value: 'Submit',
                 id: 'submit'
-            });
+            })
+            .on('click', function () {
+                var userInput = $('#name');
+                console.log('clicked');
+                localStorage.setItem(userInput.value(),);
+            })
         $(highscoreForm).append(submitHighscore);
+
+
     }
 }
 
@@ -277,7 +288,7 @@ function endQuiz() {
 $('#start-quiz').on('click', function () {
     clearPage();
     askQuestions();
-    startTimer(startTime);
+    // startTimer(startTime);
 })
 
 
