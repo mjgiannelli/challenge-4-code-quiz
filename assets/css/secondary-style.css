@@ -10,6 +10,7 @@
     width: 100rem;
 }
 
+/* style the highscore list items */
 .indv-score {
     width: 50%;
     background-color: #ccccff;
@@ -18,6 +19,7 @@
     font-size: 3rem;
 }
 
+/* style the buttons on highscore screen */
 .buttons {
     display: flex;
     align-items: flex-start;
@@ -26,6 +28,3 @@
     margin-left: 1rem;
 }
 
-.indv-score {
-    font-size: 3rem;
-}

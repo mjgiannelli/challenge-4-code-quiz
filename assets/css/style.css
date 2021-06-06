@@ -110,6 +110,7 @@ main {
     display: flex;
 }
 
+/* style userInput for initials  */
 .enter-initials {
     font-size: 4rem;
     margin-top: 1.5rem;

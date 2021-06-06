@@ -16,6 +16,7 @@
 
 // END PSEUDO CODE
 
+// set object array to empty
 var userHighscoreData = {};
 
 // set timer start time
@@ -54,7 +55,6 @@ function loadScores() {
     // get user high score info from local storage
     userHighscoreData = JSON.parse(localStorage.getItem('userScoreData'));
 
-    console.log(userHighscoreData.userInfo[1]['userInitials'])
     //if nothing in localStorage, create a new object to track all user info
     if (!userHighscoreData) {
         userHighscoreData = {
@@ -68,6 +68,7 @@ function loadScores() {
         return b.userScore - a.userScore;
     });
 
+    // add user high score information to high score screen
     var userScoreLi = $('<ol>').addClass('score-list')
 
     $('#high-score-main').append(userScoreLi);
@@ -81,6 +82,7 @@ function loadScores() {
     }
 }
 
+// create function to save score
 function saveScore() {
     localStorage.setItem('userScoreData', JSON.stringify(userHighscoreData));
 };
@@ -303,6 +305,7 @@ function endQuiz() {
 
         $(highscoreForm).append(highscorePageLink);
 
+        // add submit button which will save user data to local storage
         var submitHighscore = $('<button>')
             .addClass('button')
             .text('Submit')
@@ -313,7 +316,7 @@ function endQuiz() {
             .on('click', function () {
                 var userInput = $('#name').val();
                 var highscoreValue = parseInt($('.time-remaining').text());
-
+                // check certain user input conditions and respond accordingly
                 if (userInput === '') {
                     userInput = 'AAA'
                 }
@@ -327,7 +330,9 @@ function endQuiz() {
                     userScore: highscoreValue
                 });
 
+                // save to local storage
                 saveScore();
+                // pring to high score page
                 loadScores();
             })
         $(highscorePageLink).append(submitHighscore);
