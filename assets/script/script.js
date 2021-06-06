@@ -162,8 +162,7 @@ function askQuestions() {
 
                     validator(userSelection, currentQuestion);
                     // on click fade current question out and increase index of object array by 1
-                    // TODO: update fadeOut time to 1500
-                    $($questions.get(currentQuestion)).fadeOut(100, function () {
+                    $($questions.get(currentQuestion)).fadeOut(1000, function () {
                         currentQuestion = currentQuestion + 1;
                         //check to see if all questions were asked
                         if (currentQuestion == totalQuestions) {
