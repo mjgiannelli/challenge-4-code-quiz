@@ -54,6 +54,7 @@ function loadScores() {
     // get user high score info from local storage
     userHighscoreData = JSON.parse(localStorage.getItem('userScoreData'));
 
+    console.log(userHighscoreData.userInfo[1]['userInitials'])
     //if nothing in localStorage, create a new object to track all user info
     if (!userHighscoreData) {
         userHighscoreData = {
@@ -74,7 +75,7 @@ function loadScores() {
     for (var i = 0; i < userHighscoreData.userInfo.length; i++) {
 
         var indvScore = $('<li>').addClass('indv-score')
-            .text(userHighscoreData.userInfo[i]['userInitials'] + ' - ' + userHighscoreData.userInfo[i]['userScore'])
+            .text(userHighscoreData.userInfo[i]['userInitials'] + ' : ' + userHighscoreData.userInfo[i]['userScore'])
         $(userScoreLi).append(indvScore).insertBefore('.buttons');
 
     }
@@ -313,9 +314,16 @@ function endQuiz() {
                 var userInput = $('#name').val();
                 var highscoreValue = parseInt($('.time-remaining').text());
 
+                if (userInput === '') {
+                    userInput = 'AAA'
+                }
+                else if (userInput.length > 3) {
+                    userInput = userInput.substring(0, 3);
+                }
+
                 //save in userHighscoreData array
                 userHighscoreData.userInfo.push({
-                    userInitials: userInput,
+                    userInitials: userInput.toUpperCase(),
                     userScore: highscoreValue
                 });
 
