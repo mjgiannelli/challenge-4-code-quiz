@@ -1,15 +1,21 @@
-main {
+#high-score-main {
     align-items: flex-start;
     margin-top: 10%;
     padding-left: 33%;
 }
 
 .score-list {
-    height: 4rem;
+    display: flex;
+    flex-direction: column;
+    width: 100rem;
+}
+
+.indv-score {
     width: 50%;
     background-color: #ccccff;
-    margin: 2rem 0;
+    margin: 0.5rem 0;
     margin-left: 1rem;
+    font-size: 3rem;
 }
 
 .buttons {
@@ -18,4 +24,8 @@ main {
     width: 36%;
     justify-content: space-between;
     margin-left: 1rem;
+}
+
+.indv-score {
+    font-size: 3rem;
 }

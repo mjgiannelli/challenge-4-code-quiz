@@ -13,9 +13,7 @@
 
 // END PSEUDO CODE
 
-var userHighscoreData = {
-    userInfo: [],
-};
+var userHighscoreData = {};
 
 // set timer start time
 var startTime = 75;
@@ -49,6 +47,7 @@ var questions = [
 ]
 
 function loadScores() {
+
     userHighscoreData = JSON.parse(localStorage.getItem('userScoreData'));
 
     //if nothing in localStorage, create a new object to track all user info
@@ -58,11 +57,31 @@ function loadScores() {
         };
     }
 
+    var userScoreLi = $('<ol>').addClass('score-list')
+
+    $('#high-score-main').append(userScoreLi);
+
+    for (var i = 0; i < userHighscoreData.userInfo.length; i++) {
+
+        var indvScore = $('<li>').addClass('indv-score')
+            .text(userHighscoreData.userInfo[i]['userInitials'] + ' - ' + userHighscoreData.userInfo[i]['userScore'])
+        $(userScoreLi).append(indvScore).insertBefore('.buttons');
+
+    }
 }
 
 function saveScore() {
     localStorage.setItem('userScoreData', JSON.stringify(userHighscoreData));
 };
+
+//clear highscore list
+$('#clear-high-scores').on('click', function () {
+    $('.score-list').empty();
+    userHighscoreData = {
+        userInfo: [],
+    };
+    saveScore();
+})
 
 // function to clear the contents of main once the start button is clicked
 function clearPage() {
@@ -291,8 +310,8 @@ function endQuiz() {
                     userScore: highscoreValue
                 });
 
-                console.log(userHighscoreData);
                 saveScore();
+                loadScores();
             })
         $(highscorePageLink).append(submitHighscore);
     }
