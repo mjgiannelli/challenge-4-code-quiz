@@ -1,3 +1,5 @@
+/* STYLE THE HIGH SCORE PAGE */
+
 #high-score-main {
     align-items: flex-start;
     margin-top: 10%;
@@ -28,3 +30,41 @@
     margin-left: 1rem;
 }
 
+/* MEDIA QUERY FOR SMALLER DESKTOP SCREENS AND SMALLER */
+@media screen and (max-width: 980px) {
+    
+    .buttons {
+        width: 50%;
+    }
+}
+/* MEDIA QUERY FOR TABLETS AND SMALLER */
+@media screen and (max-width: 768px) {
+
+    #high-score-main {
+        padding-left: 0%;
+        align-items: center;
+    }
+
+    .score-list {
+        display: flex;
+        flex-direction: column;
+        ALIGN-ITEMS: center;
+        width: 80%;
+    }
+}
+
+/* MEDIA QUERY FOR MOBLE AND SMALLER */
+@media screen and (max-width: 575px) {
+    
+    
+    
+}
+    
+/* MEDIA QUERY FOR MOBLE AND SMALLER */
+@media screen and (max-width: 375px) {
+    
+    .buttons {
+        width: 75%;
+    }
+    
+}
