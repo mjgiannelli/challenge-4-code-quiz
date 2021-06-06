@@ -48,6 +48,22 @@ var questions = [
     }
 ]
 
+function loadScores() {
+    userHighscoreData = JSON.parse(localStorage.getItem('userScoreData'));
+
+    //if nothing in localStorage, create a new object to track all user info
+    if (!userHighscoreData) {
+        userHighscoreData = {
+            userInfo: [],
+        };
+    }
+
+}
+
+function saveScore() {
+    localStorage.setItem('userScoreData', JSON.stringify(userHighscoreData));
+};
+
 // function to clear the contents of main once the start button is clicked
 function clearPage() {
     $('main').empty();
@@ -279,19 +295,12 @@ function endQuiz() {
     }
 }
 
-function loadScores () {
-    
-}
-
-function saveScore() {
-    localStorage.setItem('userScoreData', JSON.stringify(userHighscoreData));
-};
-
 //when user clicks start quiz button - start timer and show first question
 $('#start-quiz').on('click', function () {
     clearPage();
     askQuestions();
 })
 
-
+// load tasks for the first time
+loadScores();
 
