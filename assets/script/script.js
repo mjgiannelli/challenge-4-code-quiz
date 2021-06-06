@@ -245,9 +245,6 @@ function endQuiz() {
         // create label & input to allow user to enter intials
         var highscoreForm = $('<form>')
             .addClass('highscore-form')
-        // .attr({
-        //     action: './high-scores.html'
-        // });
 
         $(newMain).append(highscoreForm);
 
@@ -271,6 +268,12 @@ function endQuiz() {
             });
         $(highscoreForm).append(initials);
 
+        var highscorePageLink = $('<a>').attr({
+            href: './high-scores.html'
+        });
+
+        $(highscoreForm).append(highscorePageLink);
+
         var submitHighscore = $('<button>')
             .addClass('button')
             .text('Submit')
@@ -291,7 +294,7 @@ function endQuiz() {
                 console.log(userHighscoreData);
                 saveScore();
             })
-        $(highscoreForm).append(submitHighscore);
+        $(highscorePageLink).append(submitHighscore);
     }
 }
 
