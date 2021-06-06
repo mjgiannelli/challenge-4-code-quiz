@@ -13,9 +13,12 @@
 
 // END PSEUDO CODE
 
+var userHighscoreData = {
+    userInfo: [],
+};
+
 // set timer start time
-//TODO: update timer to 75
-var startTime = 100000;
+var startTime = 75;
 
 var questions = [
     {
@@ -58,7 +61,10 @@ function askQuestions() {
     $('.time-remaining').text(startTime);
 
     //count down by 1 second
-    var runClock = setInterval(timer, 1000);
+    var runClock = setInterval(function () {
+        startTime--;
+        $('.time-remaining').text(startTime);
+    }, 1000);
 
     // check timer to see when it hits 0
     var checkTime = setInterval(function () {
@@ -68,9 +74,6 @@ function askQuestions() {
             parseInt($('.time-remaining').text(0))
             clearInterval(checkTime);
             endQuiz();
-        }
-        else {
-            console.log(retrieveTime);
         }
     }, 1000)
 
@@ -150,18 +153,6 @@ function askQuestions() {
 
     //show first question
     $($questions.get(currentQuestion)).fadeIn();
-}
-
-// set to 75 and start the timer once the start button is clicked
-// function startTimer(startTime) {
-
-
-// }
-
-// add timer function to start timer function
-function timer() {
-    startTime--;
-    $('.time-remaining').text(startTime);
 }
 
 function validator(userSelection, currentQuestion) {
@@ -264,33 +255,43 @@ function endQuiz() {
             });
         $(highscoreForm).append(initials);
 
-        var submitHighscore = $('<input>')
+        var submitHighscore = $('<button>')
             .addClass('button')
+            .text('Submit')
             .attr({
-                type: 'submit',
-                value: 'Submit',
+                type: 'button',
                 id: 'submit'
             })
             .on('click', function () {
-                var userInput = $('#name');
-                console.log('clicked');
-                localStorage.setItem(userInput.value(),);
+                var userInput = $('#name').val();
+                var highscoreValue = parseInt($('.time-remaining').text());
+
+                //save in userHighscoreData array
+                userHighscoreData.userInfo.push({
+                    userInitials: userInput,
+                    userScore: highscoreValue
+                });
+
+                console.log(userHighscoreData);
+                saveScore();
             })
         $(highscoreForm).append(submitHighscore);
-
-
     }
 }
 
+function loadScores () {
+    
+}
 
+function saveScore() {
+    localStorage.setItem('userScoreData', JSON.stringify(userHighscoreData));
+};
 
 //when user clicks start quiz button - start timer and show first question
 $('#start-quiz').on('click', function () {
     clearPage();
     askQuestions();
-    // startTimer(startTime);
 })
-
 
 
 
