@@ -47,7 +47,7 @@ var questions = [
 ]
 
 function loadScores() {
-
+    // get user high score info from local storage
     userHighscoreData = JSON.parse(localStorage.getItem('userScoreData'));
 
     //if nothing in localStorage, create a new object to track all user info
@@ -56,6 +56,12 @@ function loadScores() {
             userInfo: [],
         };
     }
+
+    // sort user high score info by value
+
+    userHighscoreData.userInfo.sort(function (a, b) {
+        return b.userScore - a.userScore;
+    });
 
     var userScoreLi = $('<ol>').addClass('score-list')
 
