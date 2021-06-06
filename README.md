@@ -13,7 +13,5 @@
 
 ![Code Quiz Questions Example](assets/images/question-example.png)
 
-![Code Quiz End Quiz Page](assets/images/end-quiz-screen.png)
-
 ## Link to Portfolio Website
 [Code Quiz Deployed Website](https://mjgiannelli.github.io/challenge-4-code-quiz//)
